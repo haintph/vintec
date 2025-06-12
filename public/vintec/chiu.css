@@ -1,0 +1,103 @@
+/* Base styles cho navigation */
+.navigation-wrap {
+    margin-left: 3%;
+    clear: both;
+}
+
+.navigation-wrap .navbar-collaps {
+    padding: 0;
+}
+
+/* Desktop - hiển thị menu ngang */
+@media (min-width: 768px) {
+    .navigation-wrap .navbar-collaps {
+        display: block !important; /* Luôn hiển thị trên desktop */
+        position: static;
+        width: auto;
+        padding-top: 0;
+        background-color: transparent;
+        border: 0;
+        box-shadow: none;
+    }
+    
+    .navigation-wrap .navi {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    .navigation-wrap .navi .panel {
+        display: inline-block;
+        margin-right: 20px;
+    }
+    
+    .navigation-wrap .navbar-toggle {
+        display: none; /* Ẩn hamburger menu trên desktop */
+    }
+    
+    .navigation-wrap .close_btn {
+        display: none; /* Ẩn nút đóng trên desktop */
+    }
+}
+
+/* Mobile - hiển thị hamburger menu */
+@media (max-width: 767px) {
+    .navigation-wrap .navbar-toggle {
+        display: block;
+        position: relative;
+        float: right;
+        padding: 9px 10px;
+        margin-top: 8px;
+        margin-right: 15px;
+        margin-bottom: 8px;
+        background-color: transparent;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    .navigation-wrap .navbar-collaps {
+        display: none; /* Ẩn menu mặc định */
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        background: #fff;
+        border-top: 1px solid #e7e7e7;
+    }
+    
+    .navigation-wrap .navbar-collaps.show {
+        display: block; /* Hiển thị khi có class 'show' */
+    }
+    
+    .navigation-wrap .navi {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .navigation-wrap .navi .panel {
+        width: 100%;
+        border-bottom: 1px solid #e7e7e7;
+    }
+    
+    .navigation-wrap .close_btn:focus {
+        left: auto;
+        right: 0px;
+        top: auto;
+        width: 40px;
+        height: 30px;
+        overflow: auto;
+        z-index: 999;
+    }
+}
+
+/* Tablet - điều chỉnh cho màn hình trung bình */
+@media (min-width: 768px) and (max-width: 991px) {
+    .navigation-wrap {
+        margin-left: 1%;
+    }
+    
+    .navigation-wrap .navi .panel {
+        margin-right: 15px;
+    }
+}
