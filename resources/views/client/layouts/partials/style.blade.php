@@ -2,3 +2,4 @@
         href="/min/?f=/themes/modules/bootstrap/bootstrap-3.4.1-dist/css/bootstrap.min.css,/themes/site/css/fonts.css,/themes/modules/slick/css/slick.min.css,/themes/modules/slick/css/accessible-slick-theme.min.css,cache/hotel/css/main_hospitality_https_a18fe85f9784de72ccd9ee5b688d4b82.css,cache/hotel/css/home_hospitality_https_64b12b4b85be0c5727dcfcdc1b4f91e3.css,cache/hotel/css/widgets_hospitality_https_7ddb2c47a51ca1099bf6b8410f71b995.css,cache/hotel/css/product_m_hospitality_https_b975bc703992b1260141c0592c96dd71.css,cache/hotel/css/banner_https_b5ddc2db50916e7e3910b4d924129315.css" />
         <link rel="stylesheet" href="/vintec/style.css" type="text/css">
     <link rel="stylesheet" href="/vintec/style1.css" type="text/css">
+     <link rel="stylesheet" href="/vintec/style8.css" type="text/css">

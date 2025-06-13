@@ -25,7 +25,7 @@
     <meta name="apple-mobile-web-app-title" content="VTech Hotel Phones">
     <meta name="application-name" content="VTech Hotel Phones">
     <meta name="msapplication-config" content="/themes/icons/browserconfig.xml">
-    <meta name="theme-color" content="#0979C6"> 
+    <meta name="theme-color" content="#0979C6">
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -327,7 +327,7 @@
                                 $("#search_keyword").attr("tabindex", "-1")
                                 $('#search_box_submit_btn_nodejs, #search_keyword, #toggle_search').on('click keyup', function (e) {
                                     e.stopPropagation();
-                                    if (e.type == "keyup" && e.which != 13) { 
+                                    if (e.type == "keyup" && e.which != 13) {
                                         return true;
                                     }
 
@@ -424,103 +424,118 @@
     <!-- Main -->
     <main class="main-content">
         <div class="login-container">
-        <div class="login-main-content">
-            <div class="login-card">
-                <div class="login-card-body">
-                    <!-- Header -->
-                    <div class="login-header">
-                        <h4 class="login-title">Đăng nhập</h4>
-                    </div>
-
-                    <!-- Login Form -->
-                    <form id="loginForm" action="#" method="POST">
-                        <div class="login-form-group">
-                            <label for="email" class="login-form-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                                </svg>
-                                Email
-                            </label>
-                            <input type="email" name="email" class="login-form-control" id="email"
-                                placeholder="Nhập email của bạn" required>
+            <div class="login-main-content">
+                <div class="login-card">
+                    <div class="login-card-body">
+                        <!-- Header -->
+                        <div class="login-header">
+                            <h4 class="login-title">Đăng nhập</h4>
                         </div>
 
-                        <div class="login-form-group">
-                            <label for="password" class="login-form-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M18,8h-1V6c0-2.76-2.24-5-5-5S7,3.24,7,6v2H6c-1.1,0-2,0.9-2,2v10c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V10 C20,8.9,19.1,8,18,8z M12,17c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S13.1,17,12,17z M15.1,8H8.9V6c0-1.71,1.39-3.1,3.1-3.1 s3.1,1.39,3.1,3.1V8z"/>
-                                </svg>
-                                Mật khẩu
-                            </label>
-                            <div class="login-password-field">
-                                <input type="password" name="password" class="login-form-control" id="password"
-                                    placeholder="Nhập mật khẩu" required>
-                                <button type="button" class="login-password-toggle" onclick="togglePassword()">
-                                    <svg id="passwordIcon" viewBox="0 0 24 24">
-                                        <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/>
+                        <!-- Login Form -->
+                        <form id="loginForm" action="#" method="POST">
+                            <div class="login-form-group">
+                                <label for="email" class="login-form-label">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                                     </svg>
+                                    Email
+                                </label>
+                                <input type="email" name="email" class="login-form-control" id="email"
+                                    placeholder="Nhập email của bạn" required>
+                            </div>
+
+                            <div class="login-form-group">
+                                <label for="password" class="login-form-label">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M18,8h-1V6c0-2.76-2.24-5-5-5S7,3.24,7,6v2H6c-1.1,0-2,0.9-2,2v10c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V10 C20,8.9,19.1,8,18,8z M12,17c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S13.1,17,12,17z M15.1,8H8.9V6c0-1.71,1.39-3.1,3.1-3.1 s3.1,1.39,3.1,3.1V8z" />
+                                    </svg>
+                                    Mật khẩu
+                                </label>
+                                <div class="login-password-field">
+                                    <input type="password" name="password" class="login-form-control" id="password"
+                                        placeholder="Nhập mật khẩu" required>
+                                    <button type="button" class="login-password-toggle" onclick="togglePassword()">
+                                        <svg id="passwordIcon" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="login-form-group">
+                                <button type="submit" class="login-btn login-btn-primary" id="loginBtn">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
+                                    </svg>
+                                    Đăng nhập
                                 </button>
                             </div>
+                        </form>
+
+                        <!-- Forgot Password -->
+                        <div class="login-forgot-password">
+                            <a href="#" onclick="forgotPassword()">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z" />
+                                </svg>
+                                Quên mật khẩu?
+                            </a>
                         </div>
 
-                        <div class="login-form-group">
-                            <button type="submit" class="login-btn login-btn-primary" id="loginBtn">
+                        <!-- Divider -->
+                        <div class="login-divider">
+                            <span>Hoặc đăng nhập với</span>
+                        </div>
+
+                        <!-- Social Login -->
+                        <div class="login-social-login">
+                            <button class="login-social-btn google" onclick="socialLogin('google')">
                                 <svg viewBox="0 0 24 24">
-                                    <path d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z"/>
+                                    <path
+                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                        fill="#4285F4" />
+                                    <path
+                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                        fill="#34A853" />
+                                    <path
+                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                        fill="#FBBC05" />
+                                    <path
+                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                        fill="#EA4335" />
                                 </svg>
-                                Đăng nhập
+                                Google
+                            </button>
+                            <button class="login-social-btn facebook" onclick="socialLogin('facebook')">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                </svg>
+                                Facebook
                             </button>
                         </div>
-                    </form>
 
-                    <!-- Forgot Password -->
-                    <div class="login-forgot-password">
-                        <a href="#" onclick="forgotPassword()">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z"/>
-                            </svg>
-                            Quên mật khẩu?
-                        </a>
-                    </div>
-
-                    <!-- Divider -->
-                    <div class="login-divider">
-                        <span>Hoặc đăng nhập với</span>
-                    </div>
-
-                    <!-- Social Login -->
-                    <div class="login-social-login">
-                        <button class="login-social-btn google" onclick="socialLogin('google')">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                            </svg>
-                            Google
-                        </button>
-                        <button class="login-social-btn facebook" onclick="socialLogin('facebook')">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                            Facebook
-                        </button>
-                    </div>
-
-                    <!-- Register Link -->
-                    <div class="login-register-link">
-                        <p>Chưa có tài khoản?</p>
-                        <a href="#" onclick="goToRegister()">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z"/>
-                            </svg>
-                            Đăng ký ngay
-                        </a>
+                        <!-- Register Link -->
+                        <div class="login-register-link">
+                            <p>Chưa có tài khoản?</p>
+                            <a href="#" onclick="goToRegister()">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z" />
+                                </svg>
+                                Đăng ký ngay
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </main>
     <!-- /.Main -->
     <!-- Footer -->
@@ -742,7 +757,7 @@
         function togglePassword() {
             const passwordInput = document.getElementById('password');
             const passwordIcon = document.getElementById('passwordIcon');
-            
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 passwordIcon.innerHTML = '<path d="M11.83,9L15,12.16V12A3,3 0 0,0 12,9C11.94,9 11.89,9 11.83,9M7.53,9.8L9.08,11.35C9.03,11.56 9,11.77 9,12A3,3 0 0,0 12,15C12.22,15 12.44,14.97 12.65,14.92L14.2,16.47C13.53,16.8 12.79,17 12,17A5,5 0 0,1 7,12C7,11.21 7.2,10.47 7.53,9.8M2,4.27L4.28,6.55L4.73,7C3.08,8.3 1.78,10 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15.03,19.2 16.38,18.66L16.81,19.09L19.73,22L21,20.73L3.27,3M12,7A5,5 0 0,1 17,12C17,12.64 16.87,13.26 16.64,13.82L19.57,16.75C21.07,15.5 22.27,13.86 23,12C21.27,7.61 17,4.5 12,4.5C10.6,4.5 9.26,4.75 8,5.2L10.17,7.35C10.76,7.13 11.37,7 12,7Z"/>';
@@ -765,22 +780,22 @@
         }
 
         // Form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const loginBtn = document.getElementById('loginBtn');
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            
+
             if (!email || !password) {
                 alert('Vui lòng nhập đầy đủ thông tin');
                 return;
             }
-            
+
             // Simulate loading
             loginBtn.classList.add('loading');
             loginBtn.innerHTML = '<div class="login-spinner"></div> Đang đăng nhập...';
-            
+
             setTimeout(() => {
                 loginBtn.classList.remove('loading');
                 loginBtn.innerHTML = `

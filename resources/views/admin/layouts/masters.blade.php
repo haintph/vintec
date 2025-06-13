@@ -205,7 +205,6 @@
                     <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
-
                 <div class="offcanvas-body p-0">
                     <div data-simplebar class="h-100">
                         <div class="p-3 settings-bar">
