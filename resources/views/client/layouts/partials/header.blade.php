@@ -250,7 +250,7 @@
                 <li><a href="tel:8887147385" class="icon-phone icon-phone-top" data-toggle="tooltip"
                         data-placement="bottom" title="Call us at 888.714.7385">Call us at 888.714.7385</a></li>
 
-                <li><a href="/customer/login" class="icon-user" data-toggle="tooltip" data-placement="bottom"
+                <li><a href="{{route('login')}}" class="icon-user" data-toggle="tooltip" data-placement="bottom"
                         title="Log in">Log in</a></li>
 
                 <li class="header-search">

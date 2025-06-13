@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController; // THÊM import này
 use Illuminate\Support\Facades\Route;
@@ -62,4 +63,18 @@ Route::middleware(['auth'])->group(function () {
 // User management routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('users', UserController::class);
+    Route::middleware(['role:admin'])->group(function () {
+        // Category Management
+        Route::get('category-list', [CategoryController::class, 'list'])->name('category-list');
+        Route::get('category-create', [CategoryController::class, 'create'])->name('category-create');
+        Route::post('category_store', [CategoryController::class, 'store'])->name('category_store');
+        Route::get('category_edit/{id}', [CategoryController::class, 'edit'])->name('category_edit');
+        Route::put('category_update/{id}', [CategoryController::class, 'update'])->name('category_update');
+        Route::delete('/destroy/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+        Route::get('category_detail/{id}', [CategoryController::class, 'detail'])->name('category_detail');
+
+        // Additional routes
+        Route::post('category_toggle/{id}', [CategoryController::class, 'toggleStatus'])->name('category_toggle');
+        Route::get('categories-active', [CategoryController::class, 'getActiveCategories'])->name('categories-active');
+    });
 });
