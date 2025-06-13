@@ -22,6 +22,7 @@ class DashboardController extends Controller
         $adminCount = User::where('role', 'admin')->count();
         $managerCount = User::where('role', 'manager')->count();
 
+        // CHÍNH XÁC: return về view admin.index
         return view('admin.index', compact('totalUsers', 'adminCount', 'managerCount'));
     }
 
@@ -33,6 +34,7 @@ class DashboardController extends Controller
 
         $managerCount = User::where('role', 'manager')->count();
         
+        // CHÍNH XÁC: return về view manager dashboard
         return view('admin.manager.index', compact('managerCount'));
     }
 }

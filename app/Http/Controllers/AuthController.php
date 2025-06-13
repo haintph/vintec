@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('client.auth.login');
+        return view('client.auth.login'); // hoặc view('client.login.login') nếu bạn muốn dùng view client
     }
 
     public function login(Request $request)
@@ -27,13 +27,10 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::user();
             
-            if ($user->isAdmin()) {
-                return redirect()->route('admin.dashboard')
-                    ->with('success', 'Chào mừng Admin ' . $user->name);
-            } else {
-                return redirect()->route('manager.dashboard')
-                    ->with('success', 'Chào mừng Manager ' . $user->name);
-            }
+            // SỬA: Redirect đến /dashboard thay vì /admin/dashboard
+            // Laravel sẽ tự động redirect đến đúng dashboard dựa vào role
+            return redirect()->route('dashboard')
+                ->with('success', 'Chào mừng ' . $user->getRoleName() . ' ' . $user->name);
         }
 
         return back()->withErrors([
@@ -64,11 +61,9 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        if ($user->isAdmin()) {
-            return redirect()->route('admin.dashboard');
-        } else {
-            return redirect()->route('manager.dashboard');
-        }
+        // SỬA: Redirect đến /dashboard
+        return redirect()->route('dashboard')
+            ->with('success', 'Đăng ký thành công!');
     }
 
     public function logout()
