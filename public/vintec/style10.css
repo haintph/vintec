@@ -1,0 +1,436 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", Arial, sans-serif;
+    line-height: 1.6;
+    color: #212529;
+}
+
+.custom-main-content {
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+}
+
+/* Header Banner - Updated for img tag */
+.custom-hero-banner {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.custom-hero-banner img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.custom-hero-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.custom-hero-title {
+    position: relative;
+    z-index: 3;
+    color: white;
+    font-size: clamp(32px, 5vw, 62px);
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Solutions Container - Reduced spacing */
+.custom-solutions-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 40px 20px; /* Giảm từ 60px xuống 40px */
+}
+
+.custom-solution-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px; /* Giảm từ 50px xuống 35px */
+    gap: 35px; /* Giảm từ 40px xuống 35px */
+    padding: 30px; /* Giảm từ 40px xuống 30px */
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Chỉ thay đổi shadow khi hover, không di chuyển */
+.custom-solution-item:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.custom-solution-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.custom-solution-image {
+    flex: 1;
+    max-width: 540px;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+}
+
+.custom-solution-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Chỉ ảnh được phóng to khi hover */
+.custom-solution-image:hover img {
+    transform: scale(1.05);
+}
+
+.custom-solution-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.custom-solution-category {
+    color: #0f75bc;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.custom-solution-title {
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.custom-solution-description {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Button Styles - Strong Override */
+.custom-btn-more {
+    display: inline-block !important;
+    padding: 12px 25px !important;
+    background-color: #ffffff !important;
+    color: #dc3545 !important;
+    text-decoration: none !important;
+    border: 2px solid #dc3545 !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+    cursor: pointer !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: auto !important;
+    min-height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    transform: none !important;
+    transition: none !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    position: static !important;
+}
+
+.custom-btn-more:hover {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+    border: 2px solid #dc3545 !important;
+    padding: 12px 25px !important;
+    font-size: 14px !important;
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+.custom-btn-more:focus {
+    outline: none !important;
+    transform: none !important;
+}
+
+/* Advantages Section - Reduced spacing */
+.custom-advantages-section {
+    background: #f8f9fa;
+    padding: 40px 0; /* Giảm từ 60px xuống 40px */
+    margin: 40px 0; /* Giảm từ 60px xuống 40px */
+}
+
+.custom-advantages-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.custom-advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px; /* Giảm từ 40px xuống 30px */
+    text-align: center;
+}
+
+.custom-advantage-item {
+    padding: 25px 20px; /* Giảm từ 30px xuống 25px */
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.custom-advantage-item:hover {
+    transform: translateY(-5px);
+}
+
+.custom-advantage-icon {
+    width: 120px;
+    height: 118px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.custom-advantage-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.custom-advantage-number {
+    color: #212529;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.custom-advantage-title {
+    color: #212529;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* Products Grid - Reduced spacing */
+.custom-products-section {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 40px 20px; /* Giảm từ 60px xuống 40px */
+}
+
+.custom-products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px; /* Giảm từ 30px xuống 25px */
+    margin-bottom: 30px; /* Giảm từ 40px xuống 30px */
+}
+
+.custom-product-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.custom-product-image {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+
+.custom-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.custom-product-card:hover .custom-product-image img {
+    transform: scale(1.05);
+}
+
+.custom-product-info {
+    padding: 20px 15px;
+    text-align: center;
+}
+
+.custom-product-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    line-height: 1.3;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Load More Button */
+.custom-load-more-container {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.custom-btn-load-more {
+    display: inline-block !important;
+    padding: 12px 25px !important;
+    background-color: #ffffff !important;
+    color: #dc3545 !important;
+    text-decoration: none !important;
+    border: 2px solid #dc3545 !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+    cursor: pointer !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: auto !important;
+    min-height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    transform: none !important;
+    transition: none !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    position: static !important;
+}
+
+.custom-btn-load-more:hover {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+    border: 2px solid #dc3545 !important;
+    padding: 12px 25px !important;
+    font-size: 14px !important;
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* Demo Section - Reduced spacing */
+.custom-demo-section {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 30px 20px; /* Giảm từ 40px xuống 30px */
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin-bottom: 30px; /* Giảm từ 40px xuống 30px */
+}
+
+.custom-demo-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 30px;
+}
+
+.custom-demo-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* Responsive Design - Optimized spacing */
+@media (max-width: 768px) {
+    .custom-solution-item {
+        flex-direction: column !important;
+        padding: 25px 20px; /* Giảm từ 30px xuống 25px */
+        gap: 25px; /* Giảm từ 30px xuống 25px */
+        margin-bottom: 30px; /* Giảm từ 40px xuống 30px */
+    }
+
+    .custom-solution-item:nth-child(even) {
+        flex-direction: column !important;
+    }
+
+    .custom-products-grid {
+        grid-template-columns: 1fr;
+        gap: 20px; /* Giảm gap cho mobile */
+    }
+
+    .custom-advantages-grid {
+        grid-template-columns: 1fr;
+        gap: 20px; /* Giảm gap cho mobile */
+    }
+
+    .custom-solutions-container {
+        padding: 30px 15px; /* Giảm từ 40px xuống 30px */
+    }
+
+    .custom-demo-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; /* Giảm gap cho mobile */
+    }
+
+    .custom-advantage-icon {
+        width: 100px; /* Kích thước trung bình cho tablet */
+        height: 98px;
+    }
+}
+
+@media (max-width: 480px) {
+    .custom-hero-banner {
+        height: 250px;
+    }
+
+    .custom-solution-item {
+        margin-bottom: 25px; /* Giảm từ 30px xuống 25px */
+        padding: 20px 15px; /* Padding nhỏ hơn cho mobile */
+    }
+
+    .custom-advantage-icon {
+        width: 90px; /* Giảm từ 120px xuống 90px cho mobile */
+        height: 88px; /* Tỷ lệ tương ứng */
+    }
+
+    .custom-advantage-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}

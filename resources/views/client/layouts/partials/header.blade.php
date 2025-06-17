@@ -148,7 +148,7 @@
             }
         </style>
 
-        <div id="vt-ccb-notify" aria-label="cookie banner" role="region">
+        {{-- <div id="vt-ccb-notify" aria-label="cookie banner" role="region">
             <div class="vt-ccb-notify-wrapper">
                 <div class="vt-ccb-notify-text">
                     <h3>This site uses cookies to store information on your computer.</h3>
@@ -166,11 +166,11 @@
 
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Cookie consent custom bottom banner[End] -->
         <div class="container custom-container">
-            <a href="/" class="logo navbar-brand" title="VTech Hospitality Home">
-                <img width="150" height="40" src="\vintec\themes\site\image\Fanvil-Logo-PNG.png"
+             <a href="{{ route('home') }}" class="logo navbar-brand" title="VinTech Hospitality Home">
+                <img width="150" height="40" src="{{ \App\Models\Logo::getByType('main') }}"
                     alt="Trang chủ của Vintech" srcset="">
             </a>
             <!-- Navigation -->
@@ -186,7 +186,7 @@
                         <li class="panel">
                             <button class="collapsed" aria-controls="#navi-subproduct" aria-expanded="false"
                                 role="button">
-                                Products <span class="triangle-down"></span>
+                                Sản phẩm <span class="triangle-down"></span>
                             </button>
                             <ul class="collapse" id="navi-subproduct" role="region" aria-label="Products">
                                 <li><a href="/products/search/category/hospitality-analog" role="link">Analog Guest
@@ -206,10 +206,10 @@
                         <li class="panel">
                             <button class="collapsed" aria-controls="#navi-subabout_us" aria-expanded="false"
                                 role="button">
-                                About Us <span class="triangle-down"></span>
+                                Giải pháp <span class="triangle-down"></span>
                             </button>
                             <ul class="collapse" id="navi-subabout_us" role="region" aria-label="About Us">
-                                <li><a href="/about/whyvtech" role="link">Why Vtech</a>
+                                <li><a href="" role="link">Danh sách</a>
                                 </li>
                                 <li><a href="/about/press/media" role="link">Videos</a>
                                 </li>
@@ -220,7 +220,19 @@
                         <li class="panel">
                             <button class="collapsed" aria-controls="#navi-subsupport" aria-expanded="false"
                                 role="button">
-                                Support <span class="triangle-down"></span>
+                                Liên hệ <span class="triangle-down"></span>
+                            </button>
+                            <ul class="collapse" id="navi-subsupport" role="region" aria-label="Support">
+                                <li><a href="/support/contact-us" role="link">Contact Us</a>
+                                </li>
+                                <li><a href="/support/product-resources/resources" role="link">Resources</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="panel">
+                            <button class="collapsed" aria-controls="#navi-subsupport" aria-expanded="false"
+                                role="button">
+                                Tin tức <span class="triangle-down"></span>
                             </button>
                             <ul class="collapse" id="navi-subsupport" role="region" aria-label="Support">
                                 <li><a href="/support/contact-us" role="link">Contact Us</a>
