@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 class Banner extends Model
@@ -39,11 +40,11 @@ class Banner extends Model
 
         // Clear các view đã cache khi banner thay đổi
         static::saved(function () {
-            \Artisan::call('view:clear');
+            Artisan::call('view:clear');
         });
 
         static::deleted(function () {
-            \Artisan::call('view:clear');
+            Artisan::call('view:clear');
         });
     }
 }

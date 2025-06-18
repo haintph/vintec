@@ -493,9 +493,9 @@
     <div class="clear"></div>
     {{-- Desktop Version --}}
     <div class="regular-slick-2 hidden-xs footer-hotel-photo-slider">
-        @foreach ($banners as $banner)
+        @foreach ($bannerFooter as $banner)
             <div class="item-photo">
-                <img height="370px" class="img-desktop" src="{{ $banner->image_url }}"
+                <img height="300px" class="img-desktop" src="{{ $banner->image_url }}"
                     alt="Banner Footer {{ $loop->iteration }}" />
             </div>
         @endforeach
@@ -503,9 +503,9 @@
 
     {{-- Mobile Version --}}
     <div class="page_content regular-slick-4 box-8 visible-xs footer-hotel-photo-slider">
-        @foreach ($banners as $banner)
+        @foreach ($bannerFooter as $banner)
             <div class="item-photo">
-                <img height="370px" class="img-mobile" src="{{ $banner->image_url }}"
+                <img height="300px" class="img-mobile" src="{{ $banner->image_url }}"
                     alt="Banner Footer {{ $loop->iteration }}" />
             </div>
         @endforeach

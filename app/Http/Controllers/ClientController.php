@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\BannerFooter;
 use App\Models\Brand;
 use App\Models\CategoryPost;
@@ -21,8 +22,8 @@ class ClientController extends Controller
             ->get();
 
         // Lấy banner footer active để hiển thị
-        $banners = BannerFooter::active()->latest()->get();
-
+        $banners = Banner::active()->latest()->get();
+        $bannerFooter = BannerFooter::active()->latest()->get();
         // Lấy bài viết blog mới nhất để hiển thị trên trang chủ (chỉ bài viết đã publish)
         $latestPosts = Post::with(['category', 'tags'])
             ->where('is_published', true)
@@ -32,7 +33,7 @@ class ClientController extends Controller
             ->take(6) // Lấy 6 bài viết mới nhất
             ->get();
 
-        return view('client.index', compact('brands', 'banners', 'latestPosts'));
+        return view('client.index', compact('brands', 'banners', 'latestPosts','bannerFooter'));
     }
 
     public function products()

@@ -206,11 +206,22 @@
              </a>
              <div class="collapse" id="sidebarCategorySolution">
                  <ul class="nav sub-navbar-nav">
+                     <!-- Category Solution -->
                      <li class="sub-nav-item">
-                         <a class="sub-nav-link" href="{{ route('category-solution-list') }}">Danh sách</a>
+                         <a class="sub-nav-link" href="{{ route('category-solution-list') }}">Danh mục giải pháp</a>
                      </li>
+                     <!-- Tag Solution -->
                      <li class="sub-nav-item">
-                         <a class="sub-nav-link" href="{{ route('category-solution-create') }}">Thêm</a>
+                         <a class="sub-nav-link" href="{{ route('tag-solution-list') }}">Thẻ giải pháp</a>
+                     </li>
+                     <!-- Solutions -->
+                     <li class="sub-nav-item">
+                         <a class="sub-nav-link" href="{{ route('solution-list') }}">Danh sách giải pháp</a>
+                     </li>
+
+                     <!-- Divider -->
+                     <li class="sub-nav-item">
+                         <hr class="dropdown-divider">
                      </li>
                  </ul>
              </div>

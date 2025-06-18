@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\{AuthController, BannerController, BannerFooterController, BrandController, CategoryController, CategoryPostController, CategorySolutionController, ClientController, DashboardController, LogoController, PostController, UserController};
+use App\Http\Controllers\SolutionController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\TagSolutionController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -149,4 +151,44 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Additional route for toggle status
     Route::patch('category_solution_toggle_status/{id}', [CategorySolutionController::class, 'toggleStatus'])->name('category_solution_toggle_status');
     Route::post('category_solution_bulk_action', [CategorySolutionController::class, 'bulkAction'])->name('category_solution_bulk_action');
+    // Route for tag solutions
+    Route::get('tag-solution-list', [TagSolutionController::class, 'list'])->name('tag-solution-list');
+    Route::get('tag-solution-create', [TagSolutionController::class, 'create'])->name('tag-solution-create');
+    Route::post('tag_solution_store', [TagSolutionController::class, 'store'])->name('tag_solution_store');
+
+    // Edit, Update, Delete
+    Route::get('tag_solution_edit/{id}', [TagSolutionController::class, 'edit'])->name('tag_solution_edit');
+    Route::put('tag_solution_update/{id}', [TagSolutionController::class, 'update'])->name('tag_solution_update');
+    Route::delete('tag_solution_destroy/{id}', [TagSolutionController::class, 'destroy'])->name('tag_solution_destroy');
+
+    // Show details
+    Route::get('tag_solution_detail/{id}', [TagSolutionController::class, 'detail'])->name('tag_solution_detail');
+
+    // Status toggle
+    Route::patch('tag_solution_toggle_status/{id}', [TagSolutionController::class, 'toggleStatus'])->name('tag_solution_toggle_status');
+
+    // Bulk actions
+    Route::post('tag_solution_bulk_action', [TagSolutionController::class, 'bulkAction'])->name('tag_solution_bulk_action');
+
+    // Utility routes
+    Route::post('tag_solution_update_post_counts', [TagSolutionController::class, 'updatePostCounts'])->name('tag_solution_update_post_counts');
+
+    // Solution management
+    Route::get('solution-list', [SolutionController::class, 'list'])->name('solution-list');
+    Route::get('solution-create', [SolutionController::class, 'create'])->name('solution-create');
+    Route::post('solution_store', [SolutionController::class, 'store'])->name('solution_store');
+
+    // Edit, Update, Delete
+    Route::get('solution_edit/{id}', [SolutionController::class, 'edit'])->name('solution_edit');
+    Route::put('solution_update/{id}', [SolutionController::class, 'update'])->name('solution_update');
+    Route::delete('solution_destroy/{id}', [SolutionController::class, 'destroy'])->name('solution_destroy');
+
+    // Show details
+    Route::get('solution_detail/{id}', [SolutionController::class, 'detail'])->name('solution_detail');
+
+    // Status toggle
+    Route::patch('solution_toggle_status/{id}', [SolutionController::class, 'toggleStatus'])->name('solution_toggle_status');
+
+    // Bulk actions
+    Route::post('solution_bulk_action', [SolutionController::class, 'bulkAction'])->name('solution_bulk_action');
 });
