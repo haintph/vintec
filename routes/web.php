@@ -25,9 +25,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ClientController::class, 'index'])->name('home');
 Route::get('/product', [ClientController::class, 'products'])->name('products');
 Route::get('/blog', [ClientController::class, 'blog'])->name('blog');
+Route::get('/contact', [ClientController::class, 'lienhe'])->name('contact');
 Route::get('/blog/{slug}', [ClientController::class, 'show'])->name('blog.show');
 // Route::get('/show', [ClientController::class, 'productShow'])->name('product.show');
 Route::get('/san-pham/{slug}', [ClientController::class, 'showProduct'])->name('products.show');
+// Solution routes
+Route::get('/solutions', [ClientController::class, 'solutions'])->name('solutions');
+Route::get('/solutions/{slug}', [ClientController::class, 'solutionShow'])->name('solutions.show');
+Route::get('/solutions/category/{slug}', [ClientController::class, 'solutionCategory'])->name('solutions.category');
+Route::get('/solutions/tag/{slug}', [ClientController::class, 'solutionTag'])->name('solutions.tag');
+Route::get('api/solutions/load-more', [ClientController::class, 'loadMoreSolutions'])->name('solutions.loadmore');
+Route::prefix('api')->group(function () {
+    // API tìm kiếm solutions cho search box
+    Route::get('solutions/search', [ClientController::class, 'searchSolutions'])->name('api.solutions.search');
+
+    // API tìm kiếm tất cả (posts + solutions) cho global search
+    Route::get('search', [ClientController::class, 'searchAll'])->name('api.search.all');
+});
 // Auth routes
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -64,7 +78,14 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // User management
     Route::resource('users', UserController::class);
-
+    //users
+    Route::get('user-list', [UserController::class, 'list'])->name('user-list');
+    Route::get('user-create', [UserController::class, 'create'])->name('user-create');
+    Route::post('user_store', [UserController::class, 'store'])->name('user-store');
+    Route::get('user_edit/{id}', [UserController::class, 'edit'])->name('user_edit');
+    Route::put('user_update/{id}', [UserController::class, 'update'])->name('user_update');
+    Route::delete('user_destroy/{id}', [UserController::class, 'destroy'])->name('user_destroy');
+    Route::get('user_detail/{id}', [UserController::class, 'detail'])->name('user_detail');
     // Category management
     Route::controller(CategoryController::class)->group(function () {
         Route::get('category-list', 'list')->name('category-list');

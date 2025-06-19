@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Log;
 
 class Solution extends Model
 {
@@ -73,16 +75,17 @@ class Solution extends Model
     public function tagSolutions(): BelongsToMany
     {
         return $this->belongsToMany(TagSolution::class, 'solution_tag_solution')
-                    ->withTimestamps();
+            ->withTimestamps();
     }
 
     /**
-     * Scope for published solutions
+     * Scope for published solutions - ĐÃ SỬA
      */
     public function scopePublished($query)
     {
         return $query->where('status', 'published')
-                    ->where('published_at', '<=', now());
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
     }
 
     /**
@@ -126,8 +129,8 @@ class Solution extends Model
     {
         return $query->where(function ($q) use ($search) {
             $q->where('title', 'LIKE', "%{$search}%")
-              ->orWhere('excerpt', 'LIKE', "%{$search}%")
-              ->orWhere('content', 'LIKE', "%{$search}%");
+                ->orWhere('excerpt', 'LIKE', "%{$search}%")
+                ->orWhere('content', 'LIKE', "%{$search}%");
         });
     }
 
@@ -184,7 +187,7 @@ class Solution extends Model
         $wordsPerMinute = 200;
         $wordCount = str_word_count(strip_tags($this->content));
         $readingTime = ceil($wordCount / $wordsPerMinute);
-        
+
         return $readingTime;
     }
 
@@ -222,9 +225,9 @@ class Solution extends Model
      */
     public function isPublished()
     {
-        return $this->status === 'published' && 
-               $this->published_at && 
-               $this->published_at <= now();
+        return $this->status === 'published' &&
+            $this->published_at &&
+            $this->published_at <= now();
     }
 
     /**
@@ -233,7 +236,7 @@ class Solution extends Model
     public function isScheduled()
     {
         return $this->status === 'scheduled' ||
-               ($this->status === 'published' && $this->published_at > now());
+            ($this->status === 'published' && $this->published_at > now());
     }
 
     /**
@@ -241,7 +244,14 @@ class Solution extends Model
      */
     public function incrementViewCount()
     {
-        $this->increment('view_count');
+        try {
+            if (Schema::hasColumn('solutions', 'view_count')) {
+                $this->increment('view_count');
+            }
+        } catch (\Exception $e) {
+            // Bỏ qua nếu không có field view_count
+            Log::warning('Could not increment view count for solution: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -249,7 +259,7 @@ class Solution extends Model
      */
     public function getStatusBadgeClass()
     {
-        return match($this->status) {
+        return match ($this->status) {
             'published' => 'bg-success',
             'draft' => 'bg-secondary',
             'scheduled' => 'bg-warning',
@@ -263,7 +273,7 @@ class Solution extends Model
      */
     public function getStatusLabel()
     {
-        return match($this->status) {
+        return match ($this->status) {
             'published' => 'Đã xuất bản',
             'draft' => 'Bản nháp',
             'scheduled' => 'Đã lên lịch',

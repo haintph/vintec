@@ -138,9 +138,9 @@ class SolutionController extends Controller
         }
 
         // Update category post count
-        if ($solution->categorySolution && $solution->status === 'published') {
-            $solution->categorySolution->updatePostCount();
-        }
+        // if ($solution->categorySolution && $solution->status === 'published') {
+        //     $solution->categorySolution->updatePostCount();
+        // }
 
         // Update tag post counts
         if ($solution->status === 'published') {
@@ -242,9 +242,9 @@ class SolutionController extends Controller
         if ($oldCategoryId && $oldCategoryId != $solution->category_solution_id) {
             CategorySolution::find($oldCategoryId)->updatePostCount();
         }
-        if ($solution->categorySolution && $solution->status === 'published') {
-            $solution->categorySolution->updatePostCount();
-        }
+        // if ($solution->categorySolution && $solution->status === 'published') {
+        //     $solution->categorySolution->updatePostCount();
+        // }
 
         // Update tag post counts
         $affectedTagIds = array_unique(array_merge($oldTagIds, $newTagIds));
@@ -273,9 +273,9 @@ class SolutionController extends Controller
         $solution->delete();
 
         // Update category post count
-        if ($categoryId) {
-            CategorySolution::find($categoryId)->updatePostCount();
-        }
+        // if ($categoryId) {
+        //     CategorySolution::find($categoryId)->updatePostCount();
+        // }
 
         // Update tag post counts
         foreach ($tagIds as $tagId) {
@@ -391,84 +391,5 @@ class SolutionController extends Controller
                 $tag->updatePostCount();
             }
         });
-    }
-
-    // ============================================
-    // Frontend Methods
-    // ============================================
-
-    /**
-     * Display solutions for frontend
-     */
-    public function index(Request $request)
-    {
-        $query = Solution::published()->with(['categorySolution', 'tagSolutions', 'user']);
-
-        // Search
-        if ($request->filled('search')) {
-            $query->search($request->get('search'));
-        }
-
-        // Filter by category
-        if ($request->filled('category')) {
-            $query->byCategory($request->get('category'));
-        }
-
-        // Filter by tag
-        if ($request->filled('tag')) {
-            $query->byTag($request->get('tag'));
-        }
-
-        // Sort
-        $sortBy = $request->get('sort', 'latest');
-        switch ($sortBy) {
-            case 'popular':
-                $query->orderBy('view_count', 'desc');
-                break;
-            case 'featured':
-                $query->orderBy('is_featured', 'desc')->orderBy('published_at', 'desc');
-                break;
-            case 'oldest':
-                $query->orderBy('published_at', 'asc');
-                break;
-            default:
-                $query->orderBy('published_at', 'desc');
-        }
-
-        $solutions = $query->paginate(12)->withQueryString();
-
-        // Get filter data
-        $categories = CategorySolution::active()->withCount('publishedSolutions')->orderBy('name')->get();
-        $popularTags = TagSolution::active()->withCount('publishedSolutions')->orderBy('post_count', 'desc')->limit(10)->get();
-
-        return view('frontend.solutions.index', compact('solutions', 'categories', 'popularTags'));
-    }
-
-    /**
-     * Display a single solution
-     */
-    public function show($slug)
-    {
-        $solution = Solution::published()
-            ->with(['categorySolution', 'tagSolutions', 'user'])
-            ->where('slug', $slug)
-            ->firstOrFail();
-
-        // Increment view count
-        $solution->incrementViewCount();
-
-        // Get related solutions
-        $relatedSolutions = Solution::published()
-            ->where('id', '!=', $solution->id)
-            ->where(function ($query) use ($solution) {
-                $query->where('category_solution_id', $solution->category_solution_id)
-                      ->orWhereHas('tagSolutions', function ($q) use ($solution) {
-                          $q->whereIn('tag_solution_id', $solution->tagSolutions->pluck('id'));
-                      });
-            })
-            ->limit(4)
-            ->get();
-
-        return view('frontend.solutions.show', compact('solution', 'relatedSolutions'));
     }
 }

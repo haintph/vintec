@@ -155,41 +155,95 @@
                 <a type="button" class="topbar-button" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <span class="d-flex align-items-center">
-                        <img class="rounded-circle" width="32" src="assets/images/users/avatar-1.jpg"
-                            alt="avatar-3">
+                        @if (auth()->user()->image && file_exists(public_path('storage/' . auth()->user()->image)))
+                            <img class="rounded-circle" width="32" height="32"
+                                src="{{ asset('storage/' . auth()->user()->image) }}" alt="{{ auth()->user()->name }}"
+                                style="object-fit: cover;">
+                        @else
+                            <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center"
+                                style="width: 32px; height: 32px;">
+                                <span class="text-white fw-bold fs-14">
+                                    {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
+                                </span>
+                            </div>
+                        @endif
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <!-- item-->
-                    <h6 class="dropdown-header">Welcome Gaston!</h6>
-                    <a class="dropdown-item" href="pages-profile.html">
-                        <i class="bx bx-user-circle text-muted fs-18 align-middle me-1"></i><span
-                            class="align-middle">Profile</span>
-                    </a>
-                    <a class="dropdown-item" href="apps-chat.html">
-                        <i class="bx bx-message-dots text-muted fs-18 align-middle me-1"></i><span
-                            class="align-middle">Messages</span>
+                    <!-- User Info Header -->
+                    <div class="dropdown-header py-3">
+                        <div class="d-flex align-items-center">
+                            @if (auth()->user()->image && file_exists(public_path('storage/' . auth()->user()->image)))
+                                <img class="rounded-circle me-2" width="40" height="40"
+                                    src="{{ asset('storage/' . auth()->user()->image) }}"
+                                    alt="{{ auth()->user()->name }}" style="object-fit: cover;">
+                            @else
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center me-2"
+                                    style="width: 40px; height: 40px;">
+                                    <span class="text-white fw-bold">
+                                        {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
+                                    </span>
+                                </div>
+                            @endif
+                            <div>
+                                <h6 class="mb-0">{{ auth()->user()->name }}</h6>
+                                <small class="text-muted">{{ auth()->user()->email }}</small>
+                                <br>
+                                <span class="badge bg-{{ auth()->user()->isAdmin() ? 'danger' : 'info' }} badge-sm">
+                                    {{ auth()->user()->getRoleName() }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Profile Menu -->
+                    <a class="dropdown-item" href="{{ route('user_detail', auth()->id()) }}">
+                        <iconify-icon icon="solar:user-circle-broken"
+                            class="text-muted fs-18 align-middle me-2"></iconify-icon>
+                        <span class="align-middle">Thông tin cá nhân</span>
                     </a>
 
-                    <a class="dropdown-item" href="pages-pricing.html">
-                        <i class="bx bx-wallet text-muted fs-18 align-middle me-1"></i><span
-                            class="align-middle">Pricing</span>
-                    </a>
-                    <a class="dropdown-item" href="pages-faqs.html">
-                        <i class="bx bx-help-circle text-muted fs-18 align-middle me-1"></i><span
-                            class="align-middle">Help</span>
-                    </a>
-                    <a class="dropdown-item" href="auth-lock-screen.html">
-                        <i class="bx bx-lock text-muted fs-18 align-middle me-1"></i><span class="align-middle">Lock
-                            screen</span>
+                    <a class="dropdown-item" href="{{ route('user_edit', auth()->id()) }}">
+                        <iconify-icon icon="solar:settings-broken"
+                            class="text-muted fs-18 align-middle me-2"></iconify-icon>
+                        <span class="align-middle">Chỉnh sửa tài khoản</span>
                     </a>
 
-                    <div class="dropdown-divider my-1"></div>
+                    @if (auth()->user()->isAdmin())
+                        <div class="dropdown-divider"></div>
+                        <h6 class="dropdown-header">Quản trị</h6>
 
+                        <a class="dropdown-item" href="{{ route('user-list') }}">
+                            <iconify-icon icon="solar:users-group-rounded-broken"
+                                class="text-muted fs-18 align-middle me-2"></iconify-icon>
+                            <span class="align-middle">Quản lý Users</span>
+                        </a>
+
+                        <a class="dropdown-item" href="{{ route('dashboard') }}">
+                            <iconify-icon icon="solar:chart-2-broken"
+                                class="text-muted fs-18 align-middle me-2"></iconify-icon>
+                            <span class="align-middle">Dashboard</span>
+                        </a>
+                    @endif
+
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Security Menu -->
+                    <a class="dropdown-item" href="#" onclick="changePassword()">
+                        <iconify-icon icon="solar:lock-keyhole-broken"
+                            class="text-muted fs-18 align-middle me-2"></iconify-icon>
+                        <span class="align-middle">Đổi mật khẩu</span>
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Logout -->
                     <a class="dropdown-item text-danger" href="#"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="bx bx-log-out fs-18 align-middle me-1"></i>
-                        <span class="align-middle">Logout</span>
+                        <iconify-icon icon="solar:logout-2-broken" class="fs-18 align-middle me-2"></iconify-icon>
+                        <span class="align-middle">Đăng xuất</span>
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -209,3 +263,9 @@
         </div>
     </div>
 </div>
+<script>
+function changePassword() {
+    // Redirect to edit page với focus vào password field
+    window.location.href = '{{ route("user_edit", auth()->id()) }}?tab=password';
+}
+</script>

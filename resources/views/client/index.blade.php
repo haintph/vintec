@@ -230,95 +230,42 @@
         </div>
     </div>
     <div class="clear"></div>
-    <div class="page_content home-box">
-        <ul class="row home-product-banners">
-            <li class="col-md-6 col-sm-6">
-                <div class="product-banner" role="group" aria-label="item">
-                    <div>
-                        <figure class="image">
-                            <img src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/hsp-product-banners-vertical-analog.jpg"
-                                alt="" />
-                        </figure>
-                    </div>
-                    <div class="content col-xs-12">
-                        <h2 class="title">ANALOG GUEST ROOM PHONES</h2>
-                        <p class="desc">VTech Analog phones are Energy Star® certified, leading to direct energy
-                            and
-                            cost savings</p>
-                        <div class="learn_more_btn_large">
-                            <a href="/products/search/category/hospitality-analog" tabindex="0">
-                                SEE ANALOG PHONES
-                            </a>
+    @if ($featuredSolutions->count() > 0)
+        <div class="page_content home-box">
+            <ul class="row home-product-banners">
+                @foreach ($featuredSolutions as $solution)
+                    <li class="col-md-6 col-sm-6">
+                        <div class="product-banner" role="group" aria-label="item">
+                            <div>
+                                <figure class="image">
+                                    @if ($solution->featured_image)
+                                        <img src="{{ Storage::url($solution->featured_image) }}"
+                                            alt="{{ $solution->title }}" />
+                                    @else
+                                        <img src="//via.placeholder.com/400x300?text=Solution+Image"
+                                            alt="{{ $solution->title }}" />
+                                    @endif
+                                </figure>
+                            </div>
+                            <div class="content col-xs-12">
+                                <h2 class="title" title="{{ $solution->title }}">
+                                    {{ strtoupper(Str::limit($solution->title, 45, '...')) }}
+                                </h2>
+                                <p class="desc" title="{{ $solution->excerpt }}">
+                                    {{ Str::limit($solution->excerpt, 120, '...') }}
+                                </p>
+                                <div class="learn_more_btn_large">
+                                    <a href="{{ route('solutions.show', $solution->slug) }}" tabindex="0">
+                                        XEM GIẢI PHÁP
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </li>
-            <li class="col-md-6 col-sm-6">
-                <div class="product-banner" role="group" aria-label="item">
-                    <div>
-                        <figure class="image">
-                            <img src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/hsp-product-banners-vertical.jpg"
-                                alt="" />
-                        </figure>
-                    </div>
-                    <div class="content col-xs-12">
-                        <h2 class="title">SIP GUEST ROOM PHONES</h2>
-                        <p class="desc">VTech Hospitality has the most secure and easy to manage SIP stack in the
-                            industry</p>
-                        <div class="learn_more_btn_large">
-                            <a href="/products/search/category/hospitality-contemporary-sip" tabindex="0">
-                                SEE SIP PHONES
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="col-md-6 col-sm-6">
-                <div class="product-banner" role="group" aria-label="item">
-                    <div>
-                        <figure class="image">
-                            <img src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/hsp-product-banners-vertical2-v2.jpg"
-                                alt="" />
-                        </figure>
-                    </div>
-                    <div class="content col-xs-12 box-relative w-full">
-                        <img class="white-sustainability-icon"
-                            src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/white-sustainability-icon.png"
-                            alt="" />
-                        <h2 class="title">E-SMART THERMOSTAT</h2>
-                        <p class="desc">The E-Smart W960 is an advanced thermostat that provides guest room
-                            comfort
-                            while reducing HVAC energy costs</p>
-                        <div class="learn_more_btn_large">
-                            <a href="/thermostat" tabindex="0">
-                                SEE THERMOSTAT
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="col-md-6 col-sm-6">
-                <div class="product-banner" role="group" aria-label="item">
-                    <div>
-                        <figure class="image">
-                            <img src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/hsp-product-banners-vertical3.jpg"
-                                alt="" />
-                        </figure>
-                    </div>
-                    <div class="content col-xs-12">
-                        <h2 class="title">ADMINISTRATIVE SOLUTIONS</h2>
-                        <p class="desc">Only VTech and Snom can outfit your entire property's communication needs
-                        </p>
-                        <div class="learn_more_btn_large">
-                            <a href="/administrative-solutions" tabindex="0">
-                                SEE SOLUTIONS
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="clearfix"></div>
     <div class="page_content hidden-xs">
         <div class="row keeping-safe">

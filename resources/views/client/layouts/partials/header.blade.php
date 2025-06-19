@@ -188,9 +188,9 @@
                          Sản phẩm <span class="triangle-down"></span>
                      </button>
                      <ul class="collapse" id="navi-subproduct" role="region" aria-label="Products">
-                         <li><a href="{{route('products')}}" role="link">Tất cả sản phẩm</a>
+                         <li><a href="{{ route('products') }}" role="link">Tất cả sản phẩm</a>
                          </li>
-                        
+
                      </ul>
                  </li>
                  <li class="panel">
@@ -206,26 +206,16 @@
                          </li>
                      </ul>
                  </li>
+
                  <li class="panel">
                      <button class="collapsed" aria-controls="#navi-subsupport" aria-expanded="false" role="button">
-                         Liên hệ <span class="triangle-down"></span>
-                     </button>
-                     <ul class="collapse" id="navi-subsupport" role="region" aria-label="Support">
-                         <li><a href="/support/contact-us" role="link">Contact Us</a>
-                         </li>
-                         <li><a href="/support/product-resources/resources" role="link">Resources</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li class="panel">
-                     <button class="collapsed" aria-controls="#navi-subsupport" aria-expanded="false" role="button">
-                        Tin tức
+                         Tin tức
                          <span class="triangle-down"></span>
                      </button>
                      <ul class="collapse" id="navi-subsupport" role="region" aria-label="Tin tức">
-                        <li>
-                            <a href="{{route('blog')}}">Tất cả</a>
-                        </li>
+                         <li>
+                             <a href="{{ route('blog') }}">Tất cả</a>
+                         </li>
                          @foreach ($newsCategories as $category)
                              <li>
                                  <a href="{{ route('blog', ['category' => $category->slug]) }}">
@@ -235,11 +225,13 @@
                          @endforeach
                      </ul>
                  </li>
-
                  <li class="panel">
-                     <a class="navi-button" href="/cruise-ship-solutions" role="link">Cruise Ship
-                         Solutions</a>
+                     <a class="navi-button" href="" role="link">Giới thiệu</a>
                  </li>
+                 <li class="panel">
+                     <a class="navi-button" href="{{route('contact')}}" role="link">Liên hệ</a>
+                 </li>
+
                  <li class="panel ">
                      <a class="navi-button" href="/support/request_quote" role="link">Request Quote</a>
                  </li>
@@ -254,8 +246,8 @@
      </nav>
 
      <ul class="header-icon">
-         <li><a href="tel:8887147385" class="icon-phone icon-phone-top" data-toggle="tooltip"
-                 data-placement="bottom" title="Call us at 888.714.7385">Call us at 888.714.7385</a></li>
+         <li><a href="tel:8887147385" class="icon-phone icon-phone-top" data-toggle="tooltip" data-placement="bottom"
+                 title="Call us at 888.714.7385">Call us at 888.714.7385</a></li>
 
          <li><a href="{{ route('login') }}" class="icon-user" data-toggle="tooltip" data-placement="bottom"
                  title="Log in">Log in</a></li>

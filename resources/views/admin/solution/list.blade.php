@@ -212,17 +212,17 @@
                                 <table class="table table-hover mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <th width="50">
+                                            <th width="40">
                                                 <input type="checkbox" id="selectAllCheckbox" onchange="toggleSelectAll()">
                                             </th>
-                                            <th>Solution</th>
-                                            <th>Chuyên mục</th>
-                                            <th>Tags</th>
-                                            <th>Tác giả</th>
-                                            <th>Trạng thái</th>
-                                            <th>Stats</th>
-                                            <th>Ngày</th>
-                                            <th width="120">Thao tác</th>
+                                            <th width="45%">Solution</th>
+                                            <th width="10%">Chuyên mục</th>
+                                            <th width="12%">Tags</th>
+                                            <th width="12%">Tác giả</th>
+                                            <th width="8%">Trạng thái</th>
+                                            <th width="8%">Stats</th>
+                                            <th width="10%">Ngày</th>
+                                            <th width="80">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -232,103 +232,126 @@
                                                     <input type="checkbox" class="solution-checkbox" value="{{ $solution->id }}">
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex align-items-start gap-3">
+                                                    <div class="d-flex align-items-center gap-3">
                                                         @if($solution->featured_image)
                                                             <div class="flex-shrink-0">
                                                                 <img src="{{ Storage::url($solution->featured_image) }}" 
                                                                      alt="{{ $solution->title }}" 
-                                                                     class="rounded" style="width: 60px; height: 60px; object-fit: cover;">
+                                                                     class="rounded shadow-sm" 
+                                                                     style="width: 50px; height: 50px; object-fit: cover;">
                                                             </div>
                                                         @else
                                                             <div class="flex-shrink-0">
                                                                 <div class="rounded bg-light d-flex align-items-center justify-content-center" 
-                                                                     style="width: 60px; height: 60px;">
+                                                                     style="width: 50px; height: 50px;">
                                                                     <i class="fas fa-file-alt text-muted"></i>
                                                                 </div>
                                                             </div>
                                                         @endif
-                                                        <div class="flex-grow-1">
-                                                            <h6 class="mb-1">
+                                                        <div class="flex-grow-1 min-w-0">
+                                                            <div class="mb-1">
                                                                 <a href="{{ route('solution_detail', $solution->id) }}" 
-                                                                   class="text-dark text-decoration-none">
-                                                                    {{ Str::limit($solution->title, 50) }}
+                                                                   class="text-dark text-decoration-none fw-medium d-inline-block text-truncate"
+                                                                   style="max-width: 280px;"
+                                                                   title="{{ $solution->title }}"
+                                                                   data-bs-toggle="tooltip" 
+                                                                   data-bs-placement="top">
+                                                                    {{ Str::limit($solution->title, 35) }}
                                                                 </a>
                                                                 @if($solution->is_featured)
                                                                     <i class="fas fa-star text-warning ms-1" title="Nổi bật"></i>
                                                                 @endif
-                                                            </h6>
+                                                            </div>
                                                             @if($solution->excerpt)
-                                                                <p class="text-muted small mb-1">
-                                                                    {{ Str::limit($solution->excerpt, 80) }}
+                                                                <p class="text-muted small mb-1 line-clamp-2" 
+                                                                   title="{{ strip_tags($solution->excerpt) }}"
+                                                                   data-bs-toggle="tooltip" 
+                                                                   data-bs-placement="bottom">
+                                                                    {{ Str::limit(strip_tags($solution->excerpt), 60) }}
                                                                 </p>
                                                             @endif
-                                                            <small class="text-muted">
-                                                                <i class="fas fa-link me-1"></i>
-                                                                <code>/solution/{{ $solution->slug }}</code>
-                                                            </small>
+                                                            <div class="d-flex align-items-center gap-2">
+                                                                <small class="text-muted d-flex align-items-center">
+                                                                    <i class="fas fa-link me-1"></i>
+                                                                    <code class="text-truncate" style="max-width: 150px;" title="/solution/{{ $solution->slug }}">
+                                                                        /solution/{{ Str::limit($solution->slug, 20) }}
+                                                                    </code>
+                                                                </small>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     @if($solution->categorySolution)
-                                                        <span class="badge bg-info">
-                                                            {{ $solution->categorySolution->name }}
+                                                        <span class="badge bg-info-subtle text-info rounded-pill">
+                                                            {{ Str::limit($solution->categorySolution->name, 15) }}
                                                         </span>
                                                     @else
-                                                        <span class="text-muted">Chưa phân loại</span>
+                                                        <span class="text-muted small">Chưa phân loại</span>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     @if($solution->tagSolutions->count() > 0)
                                                         <div class="d-flex flex-wrap gap-1">
-                                                            @foreach($solution->tagSolutions->take(3) as $tag)
-                                                                <span class="badge bg-primary">#{{ $tag->name }}</span>
+                                                            @foreach($solution->tagSolutions->take(2) as $tag)
+                                                                <span class="badge bg-primary-subtle text-primary rounded-pill small">
+                                                                    #{{ Str::limit($tag->name, 8) }}
+                                                                </span>
                                                             @endforeach
-                                                            @if($solution->tagSolutions->count() > 3)
-                                                                <span class="badge bg-secondary">+{{ $solution->tagSolutions->count() - 3 }}</span>
+                                                            @if($solution->tagSolutions->count() > 2)
+                                                                <span class="badge bg-secondary-subtle text-secondary rounded-pill small">
+                                                                    +{{ $solution->tagSolutions->count() - 2 }}
+                                                                </span>
                                                             @endif
                                                         </div>
                                                     @else
-                                                        <span class="text-muted">Chưa có tag</span>
+                                                        <span class="text-muted small">Chưa có tag</span>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <div class="avatar-sm">
-                                                            <div class="avatar-title rounded-circle bg-light text-primary">
+                                                            <div class="avatar-title rounded-circle bg-primary-subtle text-primary">
                                                                 {{ strtoupper(substr($solution->user->name, 0, 1)) }}
                                                             </div>
                                                         </div>
-                                                        <div>
-                                                            <div class="fw-medium">{{ $solution->user->name }}</div>
-                                                            <small class="text-muted">{{ $solution->user->email }}</small>
+                                                        <div class="min-w-0">
+                                                            <div class="fw-medium text-truncate" style="max-width: 80px;" 
+                                                                 title="{{ $solution->user->name }}">
+                                                                {{ Str::limit($solution->user->name, 12) }}
+                                                            </div>
+                                                            <small class="text-muted text-truncate d-block" 
+                                                                   style="max-width: 80px;" 
+                                                                   title="{{ $solution->user->email }}">
+                                                                {{ Str::limit($solution->user->email, 15) }}
+                                                            </small>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <span class="badge {{ $solution->getStatusBadgeClass() }}">
+                                                    <span class="badge {{ $solution->getStatusBadgeClass() }} rounded-pill">
                                                         {{ $solution->getStatusLabel() }}
                                                     </span>
                                                     @if($solution->status === 'scheduled')
                                                         <br><small class="text-muted">
-                                                            {{ $solution->published_at->format('d/m/Y H:i') }}
+                                                            {{ $solution->published_at->format('d/m H:i') }}
                                                         </small>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column gap-1">
-                                                        <div class="d-flex align-items-center gap-1">
+                                                        <small class="d-flex align-items-center gap-1">
                                                             <i class="fas fa-eye text-info"></i>
-                                                            <small>{{ number_format($solution->view_count) }}</small>
-                                                        </div>
-                                                        <div class="d-flex align-items-center gap-1">
+                                                            <span>{{ number_format($solution->view_count) }}</span>
+                                                        </small>
+                                                        <small class="d-flex align-items-center gap-1">
                                                             <i class="fas fa-heart text-danger"></i>
-                                                            <small>{{ number_format($solution->like_count) }}</small>
-                                                        </div>
-                                                        <div class="d-flex align-items-center gap-1">
+                                                            <span>{{ number_format($solution->like_count) }}</span>
+                                                        </small>
+                                                        <small class="d-flex align-items-center gap-1">
                                                             <i class="fas fa-comments text-primary"></i>
-                                                            <small>{{ number_format($solution->comment_count) }}</small>
-                                                        </div>
+                                                            <span>{{ number_format($solution->comment_count) }}</span>
+                                                        </small>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -351,7 +374,7 @@
                                                                 data-bs-toggle="dropdown">
                                                             <i class="fas fa-ellipsis-v"></i>
                                                         </button>
-                                                        <ul class="dropdown-menu">
+                                                        <ul class="dropdown-menu dropdown-menu-end">
                                                             <li>
                                                                 <a class="dropdown-item" href="{{ route('solution_detail', $solution->id) }}">
                                                                     <i class="fas fa-eye me-2"></i>Xem chi tiết
@@ -446,8 +469,94 @@
         <input type="hidden" name="solution_ids" id="bulkSolutionIds">
     </form>
 
+    <!-- Custom Styles -->
+    <style>
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+            max-height: 2.8em;
+        }
+
+        .text-truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .min-w-0 {
+            min-width: 0;
+        }
+
+        .avatar-sm {
+            width: 32px;
+            height: 32px;
+        }
+
+        .avatar-title {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge.rounded-pill {
+            font-size: 0.75em;
+        }
+
+        .table td {
+            vertical-align: middle;
+            padding: 0.75rem;
+        }
+
+        .table th {
+            border-bottom: 2px solid #e9ecef;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #495057;
+            padding: 0.75rem;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .dropdown-menu-end {
+            --bs-position: end;
+        }
+
+        @media (max-width: 768px) {
+            .table-responsive {
+                font-size: 0.875rem;
+            }
+            
+            .d-flex.align-items-center.gap-3 {
+                gap: 0.5rem !important;
+            }
+            
+            .flex-shrink-0 img,
+            .flex-shrink-0 div {
+                width: 40px !important;
+                height: 40px !important;
+            }
+        }
+    </style>
+
     <!-- Scripts -->
     <script>
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+
         // Checkbox handling
         function toggleSelectAll() {
             const selectAllCheckbox = document.getElementById('selectAllCheckbox');
@@ -472,10 +581,10 @@
             
             if (checkedBoxes.length > 0) {
                 bulkActionButton.disabled = false;
-                bulkActionButton.textContent = `Bulk Actions (${checkedBoxes.length})`;
+                bulkActionButton.innerHTML = `<i class="fas fa-cogs me-1"></i>Bulk Actions (${checkedBoxes.length})`;
             } else {
                 bulkActionButton.disabled = true;
-                bulkActionButton.textContent = 'Bulk Actions';
+                bulkActionButton.innerHTML = '<i class="fas fa-cogs me-1"></i>Bulk Actions';
             }
         }
 
