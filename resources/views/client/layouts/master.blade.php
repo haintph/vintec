@@ -23,9 +23,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css">
-    <title>Official VTech Hotel Phones | VTech® Hotel Phones</title>
+    <title>@yield('title', 'Vintech')</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/themes/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="/themes/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/vintec/themes/icons/logo.ico" sizes="32x32">
     <link rel="icon" type="image/png" href="/themes/icons/favicon-16x16.png" sizes="16x16">
     <link rel="manifest" href="/themes/icons/manifest.json">
     <link rel="mask-icon" href="/themes/icons/safari-pinned-tab.svg" color="#004784">
@@ -34,7 +34,7 @@
     <meta name="application-name" content="VTech Hotel Phones">
     <meta name="msapplication-config" content="/themes/icons/browserconfig.xml">
     <meta name="theme-color" content="#0979C6">
-
+    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">

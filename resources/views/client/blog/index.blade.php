@@ -1,4 +1,5 @@
 @extends('client.layouts.master')
+@section('title', 'Trang tin tức')
 @section('content')
     <main role="main" id="main-content">
 
@@ -34,7 +35,15 @@
         </div>
         <div class="clear"></div>
 
-        <!-- Filter Section -->
+        <div class="page_content videos-images press-releases-page">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="section-header">
+                        <h2 class="uppercase">Blog & Tin Tức</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- Filter Section -->
         <div class="page_content">
             <div class="row">
                 <div class="col-xs-12">
@@ -73,15 +82,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="page_content videos-images press-releases-page">
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    <div class="section-header">
-                        <h2 class="uppercase">Blog & Tin Tức</h2>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-xs-12">
                     @if (isset($posts) && $posts->count() > 0)

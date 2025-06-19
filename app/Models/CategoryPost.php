@@ -67,4 +67,5 @@ class CategoryPost extends Model
     {
         return $this->publishedPosts()->count();
     }
+    
 }

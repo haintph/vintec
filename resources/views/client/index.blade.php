@@ -146,96 +146,39 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="section-header">
-                    <h2>Featured Products</h2>
+                    <h2>Products & Sản phẩm</h2>
                 </div>
             </div>
             <div class="col-xs-12">
                 <ul class="list-post">
-                    <li class="item col-md-3 col-sm-6 col-xs-12">
-                        <div class="item-card" role="group" aria-label="product">
-                            <div>
-                                <figure class="image">
-                                    <img src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/hsp-featured-3211.jpg"
-                                        alt="" />
-                                </figure>
-                            </div>
-                            <div class="content col-xs-12">
-                                <h2 class="title">NG-A3211</h2>
-                                <p class="desc">Gen 1-Line Analog Corded Phone</p>
-                                <div class="learn_more_btn_large">
-                                    <a href="https://www.vtechhotelphones.com/pd/4815/NG-A3211-Next-Gen-1-Line-Analog-Corded-Phone"
-                                        tabindex="0">
-                                        LEARN MORE<span class="arrow-right-large"></span>
-                                    </a>
+                    @foreach ($featuredProducts as $product)
+                        <li class="item col-md-3 col-sm-6 col-xs-12">
+                            <div class="item-card" role="group" aria-label="product">
+                                <div>
+                                    <figure class="image">
+                                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}" />
+                                    </figure>
                                 </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="item col-md-3 col-sm-6 col-xs-12">
-                        <div class="item-card" role="group" aria-label="product">
-                            <div>
-                                <figure class="image">
-                                    <img src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/hsp-featured-s2116.jpg"
-                                        alt="" />
-                                </figure>
-                            </div>
-                            <div class="content col-xs-12">
-                                <h3 class="title">CTM-S2116</h3>
-                                <p class="desc">Next Gen 1-Line SIP Cordless Phone</p>
-                                <div class="learn_more_btn_large">
-                                    <a href="https://www.vtechhotelphones.com/pd/4841/CTM-S2116-Next-Gen-1-Line-SIP-Cordless-Phone"
-                                        tabindex="0">
-                                        LEARN MORE<span class="arrow-right-large"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="item col-md-3 col-sm-6 col-xs-12">
-                        <div class="item-card" role="group" aria-label="product">
-                            <div>
-                                <figure class="image">
-                                    <img src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/hsp-featured-thermostat.jpg"
-                                        alt="" />
-                                </figure>
-                            </div>
-                            <div class="content col-xs-12">
-                                <div class="box-relative">
-                                    <h3 class="title">E-SMART W960</h3>
-                                    <p class="desc">Wireless Thermostat</p>
+                                <div class="content col-xs-12">
+                                    <h2 class="title">{{ $product->product_code }}</h2>
+                                    <p class="desc">{{ $product->name }}</p>
                                     <div class="learn_more_btn_large">
-                                        <a href="https://www.vtechhotelphones.com/pd/4677/E-SMART-W960-Wireless-Thermostat"
-                                            tabindex="0">
-                                            LEARN MORE<span class="arrow-right-large"></span>
+                                        <a href="{{ route('products.show', $product->slug) }}" tabindex="0">
+                                            CHI TIẾT<span class="arrow-right-large"></span>
                                         </a>
                                     </div>
-                                    <img class="green-sustainability-icon"
-                                        src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/green-sustainability-icon.png"
-                                        alt="" />
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="item col-md-3 col-sm-6 col-xs-12">
-                        <div class="item-card" role="group" aria-label="product">
-                            <div>
-                                <figure class="image">
-                                    <img src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/hsp-featured-d785.jpg"
-                                        alt="" />
-                                </figure>
+                        </li>
+                    @endforeach
+
+                    @if ($featuredProducts->isEmpty())
+                        <li class="item col-xs-12">
+                            <div class="text-center">
+                                <p>Không có sản phẩm nào để hiển thị.</p>
                             </div>
-                            <div class="content col-xs-12">
-                                <h3 class="title">D785 Desk Phone</h3>
-                                <p class="desc">Administrative Solution</p>
-                                <div class="learn_more_btn_large">
-                                    <a href="https://www.snomamericas.com/en/pd/ip-phones/desk-phones/d7xx-series-next-gen/d785"
-                                        tabindex="0">
-                                        LEARN MORE<span class="arrow-right-large"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -246,8 +189,7 @@
             <div class="col-xs-12">
                 <div class="social-chanel">
                     <div class="social-item">
-                        <a href="https://www.linkedin.com/showcase/vtech-hospitality" target="_blank"
-                            aria-label="Linkedin">
+                        <a href="https://www.linkedin.com/showcase/vtech-hospitality" target="_blank" aria-label="Linkedin">
                             <img src="//cdn-web.vtp-media.com/hotelphones/images/theme2023/homePage/LI-In-Bug.png"
                                 alt="Linkedin" />
                         </a>

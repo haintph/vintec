@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\BannerFooter;
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\CategoryPost;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -24,27 +26,167 @@ class ClientController extends Controller
         // Lấy banner footer active để hiển thị
         $banners = Banner::active()->latest()->get();
         $bannerFooter = BannerFooter::active()->latest()->get();
+
         // Lấy bài viết blog mới nhất để hiển thị trên trang chủ (chỉ bài viết đã publish)
         $latestPosts = Post::with(['category', 'tags'])
             ->where('is_published', true)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->latest('published_at')
-            ->take(6) // Lấy 6 bài viết mới nhất
+            ->take(3) // Lấy 3 bài viết mới nhất
             ->get();
 
-        return view('client.index', compact('brands', 'banners', 'latestPosts','bannerFooter'));
+        // Lấy các sản phẩm featured/nổi bật để hiển thị trên trang chủ
+        $featuredProducts = Product::with(['category', 'primaryImage'])
+            ->active() // Chỉ lấy sản phẩm active
+            ->latest() // Sắp xếp theo mới nhất
+            ->take(8) // Lấy 8 sản phẩm (có thể điều chỉnh số lượng)
+            ->get();
+
+        return view('client.index', compact('brands', 'banners', 'latestPosts', 'bannerFooter', 'featuredProducts'));
+    }
+    public function products(Request $request)
+    {
+        // Get all categories for filters
+        $categories = Category::where('is_active', true)->get();
+
+        // Base query for products
+        $query = Product::with(['category', 'variants'])
+            ->where('is_active', true);
+
+        // Apply category filter
+        if ($request->has('category') && !empty($request->category)) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('slug', $request->category);
+            });
+        }
+
+        // Apply price range filter (presets) - Updated for VND
+        if ($request->has('price_range') && !empty($request->price_range)) {
+            switch ($request->price_range) {
+                // New VND price ranges
+                case '0-1000000':
+                case 'under_1m':
+                    $query->where('price', '<', 1000000); // Dưới 1 triệu
+                    break;
+                case '1000000-5000000':
+                case '1m_5m':
+                    $query->whereBetween('price', [1000000, 5000000]); // 1-5 triệu
+                    break;
+                case '5000000-10000000':
+                case '5m_10m':
+                    $query->whereBetween('price', [5000000, 10000000]); // 5-10 triệu
+                    break;
+                case '10000000-20000000':
+                case '10m_20m':
+                    $query->whereBetween('price', [10000000, 20000000]); // 10-20 triệu
+                    break;
+                case '20000000-999999999':
+                case 'over_20m':
+                    $query->where('price', '>', 20000000); // Trên 20 triệu
+                    break;
+
+                // Legacy USD ranges (for backward compatibility)
+                case '0-100':
+                case 'under_100':
+                    $query->where('price', '<', 100);
+                    break;
+                case '100-500':
+                    $query->whereBetween('price', [100, 500]);
+                    break;
+                case '500-1000':
+                    $query->whereBetween('price', [500, 1000]);
+                    break;
+                case '1000-999999':
+                case 'over_1000':
+                    $query->where('price', '>', 1000);
+                    break;
+            }
+        }
+
+        // Apply custom price range filter (from sliders)
+        if ($request->has('min_price') && !empty($request->min_price)) {
+            $minPrice = is_numeric($request->min_price) ? (int)$request->min_price : 0;
+            if ($minPrice >= 0) {
+                $query->where('price', '>=', $minPrice);
+            }
+        }
+
+        if ($request->has('max_price') && !empty($request->max_price)) {
+            $maxPrice = is_numeric($request->max_price) ? (int)$request->max_price : 20000000;
+            if ($maxPrice > 0) {
+                $query->where('price', '<=', $maxPrice);
+            }
+        }
+
+        // Apply search filter
+        if ($request->has('search') && !empty($request->search)) {
+            $searchTerm = $request->search;
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('name', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('product_code', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('description', 'LIKE', "%{$searchTerm}%");
+            });
+        }
+
+        // Apply sorting
+        $sortBy = $request->get('sort', 'name_asc');
+        switch ($sortBy) {
+            case 'name_desc':
+                $query->orderBy('name', 'desc');
+                break;
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+            case 'newest':
+                $query->orderBy('created_at', 'desc');
+                break;
+            default:
+                $query->orderBy('name', 'asc');
+                break;
+        }
+
+        // Paginate results
+        $products = $query->paginate(12)->appends($request->query());
+
+        // Handle AJAX requests
+        if ($request->ajax() || $request->has('ajax')) {
+            return response()->json([
+                'success' => true,
+                'html' => view('client.products.partials.products-grid', compact('products'))->render(),
+                'pagination' => view('client.products.partials.pagination', compact('products'))->render(),
+                'count' => $products->count(),
+                'total' => $products->total(),
+                'current_page' => $products->currentPage(),
+                'last_page' => $products->lastPage(),
+                'filters' => $request->only(['category', 'price_range', 'search', 'sort', 'min_price', 'max_price'])
+            ]);
+        }
+
+        // Regular page load
+        return view('client.products.index', compact('products', 'categories'));
     }
 
-    public function products()
-    {
-        return view('client.products.index');
-    }
+    // public function show($slug)
+    // {
+    //     $product = Product::with(['category', 'variants'])
+    //         ->where('slug', $slug)
+    //         ->where('is_active', true)
+    //         ->firstOrFail();
 
-    public function productShow()
-    {
-        return view('client.products.show');
-    }
+    //     // Get related products from same category
+    //     $relatedProducts = Product::with(['category', 'variants'])
+    //         ->where('category_id', $product->category_id)
+    //         ->where('id', '!=', $product->id)
+    //         ->where('is_active', true)
+    //         ->limit(4)
+    //         ->get();
+
+    //     return view('client.products.show', compact('product', 'relatedProducts'));
+    // }
 
     public function blog(Request $request)
     {
@@ -53,8 +195,8 @@ class ClientController extends Controller
 
         // Filter published posts only
         $query->where('is_published', true)
-              ->whereNotNull('published_at')
-              ->where('published_at', '<=', now());
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
 
         // Search functionality
         if ($request->filled('search')) {
@@ -216,7 +358,7 @@ class ClientController extends Controller
         try {
             // Find category
             $category = CategoryPost::where('slug', $categorySlug)->firstOrFail();
-            
+
             // Get posts in this category (chỉ bài viết đã publish)
             $query = Post::with(['category', 'tags'])
                 ->where('is_published', true)
@@ -263,7 +405,7 @@ class ClientController extends Controller
         try {
             // Find tag
             $tag = Tag::where('slug', $tagSlug)->firstOrFail();
-            
+
             // Get posts with this tag (chỉ bài viết đã publish)
             $query = Post::with(['category', 'tags'])
                 ->where('is_published', true)
@@ -304,6 +446,30 @@ class ClientController extends Controller
         } catch (\Exception $e) {
             Log::error('Error in tag method: ' . $e->getMessage());
             abort(404, 'Thẻ không tồn tại');
+        }
+    }
+    public function showProduct($slug)
+    {
+        try {
+            $product = Product::with(['category', 'primaryImage', 'images'])
+                ->where('slug', $slug)
+                ->active()
+                ->firstOrFail();
+
+            $relatedProducts = Product::with(['category', 'primaryImage'])
+                ->where('category_id', $product->category_id)
+                ->where('id', '!=', $product->id)
+                ->active()
+                ->latest()
+                ->take(4)
+                ->get();
+
+            return view('client.products.show', compact('product', 'relatedProducts'));
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            abort(404, 'Sản phẩm không tồn tại');
+        } catch (\Exception $e) {
+            Log::error('Error in product show method: ' . $e->getMessage());
+            abort(500, 'Có lỗi xảy ra khi tải sản phẩm');
         }
     }
 }

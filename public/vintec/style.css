@@ -13,25 +13,27 @@
  *    Google+ [ https://plus.google.com/+Icons8 ]
  *    GitHub [ https://github.com/icons8 ]
  */
-.la,.la-stack {
+.la,
+.la-stack {
     display: inline-block
 }
 
-.la-fw,.la-li {
+.la-fw,
+.la-li {
     text-align: center
 }
 
 @font-face {
     font-family: LineAwesome;
     src: url(../fonts/line-awesome.eot?v=1.1.);
-    src: url(../fonts/line-awesome.eot??v=1.1.#iefix) format("embedded-opentype"),url(../fonts/line-awesome.woff2?v=1.1.) format("woff2"),url(../fonts/line-awesome.woff?v=1.1.) format("woff"),url(../fonts/line-awesome.ttf?v=1.1.) format("truetype"),url(../fonts/line-awesome.svg?v=1.1.#fa) format("svg");
+    src: url(../fonts/line-awesome.eot??v=1.1.#iefix) format("embedded-opentype"), url(../fonts/line-awesome.woff2?v=1.1.) format("woff2"), url(../fonts/line-awesome.woff?v=1.1.) format("woff"), url(../fonts/line-awesome.ttf?v=1.1.) format("truetype"), url(../fonts/line-awesome.svg?v=1.1.#fa) format("svg");
     font-weight: 400;
     font-style: normal
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
     @font-face {
-        font-family:LineAwesome;
+        font-family: LineAwesome;
         src: url(../fonts/line-awesome.svg?v=1.1.#fa) format("svg")
     }
 }
@@ -168,19 +170,23 @@
 
 .la-flip-horizontal {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
-    -webkit-transform: scale(-1,1);
-    -ms-transform: scale(-1,1);
-    transform: scale(-1,1)
+    -webkit-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1)
 }
 
 .la-flip-vertical {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1);
-    -webkit-transform: scale(1,-1);
-    -ms-transform: scale(1,-1);
-    transform: scale(1,-1)
+    -webkit-transform: scale(1, -1);
+    -ms-transform: scale(1, -1);
+    transform: scale(1, -1)
 }
 
-:root .la-flip-horizontal,:root .la-flip-vertical,:root .la-rotate-180,:root .la-rotate-270,:root .la-rotate-90 {
+:root .la-flip-horizontal,
+:root .la-flip-vertical,
+:root .la-rotate-180,
+:root .la-rotate-270,
+:root .la-rotate-90 {
     filter: none
 }
 
@@ -192,7 +198,8 @@
     vertical-align: middle
 }
 
-.la-stack-1x,.la-stack-2x {
+.la-stack-1x,
+.la-stack-2x {
     position: absolute;
     left: 0;
     width: 100%;
@@ -627,19 +634,23 @@
     content: "\f167"
 }
 
-.la-caret-square-o-down:before,.la-toggle-down:before {
+.la-caret-square-o-down:before,
+.la-toggle-down:before {
     content: "\f168"
 }
 
-.la-caret-square-o-left:before,.la-toggle-left:before {
+.la-caret-square-o-left:before,
+.la-toggle-left:before {
     content: "\f169"
 }
 
-.la-caret-square-o-right:before,.la-toggle-right:before {
+.la-caret-square-o-right:before,
+.la-toggle-right:before {
     content: "\f16a"
 }
 
-.la-caret-square-o-up:before,.la-toggle-up:before {
+.la-caret-square-o-up:before,
+.la-toggle-up:before {
     content: "\f16b"
 }
 
@@ -999,7 +1010,8 @@
     content: "\f1c4"
 }
 
-.la-empire:before,.la-ge:before {
+.la-empire:before,
+.la-ge:before {
     content: "\f1c5"
 }
 
@@ -1071,7 +1083,8 @@
     content: "\f1d6"
 }
 
-.la-facebook-f:before,.la-facebook:before {
+.la-facebook-f:before,
+.la-facebook:before {
     content: "\f1d7"
 }
 
@@ -1267,7 +1280,8 @@
     content: "\f207"
 }
 
-.la-futbol-o:before,.la-soccer-ball-o:before {
+.la-futbol-o:before,
+.la-soccer-ball-o:before {
     content: "\f208"
 }
 
@@ -1359,7 +1373,8 @@
     content: "\f21e"
 }
 
-.la-gittip:before,.la-gratipay:before {
+.la-gittip:before,
+.la-gratipay:before {
     content: "\f21f"
 }
 
@@ -1635,7 +1650,8 @@
     content: "\f263"
 }
 
-.la-life-ring:before,.la-support:before {
+.la-life-ring:before,
+.la-support:before {
     content: "\f264"
 }
 
@@ -1907,11 +1923,13 @@
     content: "\f2a7"
 }
 
-.la-paper-plane:before,.la-send:before {
+.la-paper-plane:before,
+.la-send:before {
     content: "\f2a8"
 }
 
-.la-paper-plane-o:before,.la-send-o:before {
+.la-paper-plane-o:before,
+.la-send-o:before {
     content: "\f2a9"
 }
 
@@ -2143,7 +2161,8 @@
     content: "\f2e2"
 }
 
-.la-feed:before,.la-rss:before {
+.la-feed:before,
+.la-rss:before {
     content: "\f2e3"
 }
 
@@ -2283,7 +2302,8 @@
     content: "\f305"
 }
 
-.la-sort:before,.la-unsorted:before {
+.la-sort:before,
+.la-unsorted:before {
     content: "\f306"
 }
 
@@ -2303,11 +2323,13 @@
     content: "\f30a"
 }
 
-.la-sort-asc:before,.la-sort-up:before {
+.la-sort-asc:before,
+.la-sort-up:before {
     content: "\f30b"
 }
 
-.la-sort-desc:before,.la-sort-down:before {
+.la-sort-desc:before,
+.la-sort-down:before {
     content: "\f30c"
 }
 
@@ -2363,7 +2385,9 @@
     content: "\f319"
 }
 
-.la-star-half-empty:before,.la-star-half-full:before,.la-star-half-o:before {
+.la-star-half-empty:before,
+.la-star-half-full:before,
+.la-star-half-o:before {
     content: "\f31a"
 }
 
@@ -2467,7 +2491,8 @@
     content: "\f333"
 }
 
-.la-television:before,.la-tv:before {
+.la-television:before,
+.la-tv:before {
     content: "\f334"
 }
 
@@ -2523,7 +2548,8 @@
     content: "\f341"
 }
 
-.la-remove:before,.la-times:before {
+.la-remove:before,
+.la-times:before {
     content: "\f342"
 }
 
@@ -2555,7 +2581,8 @@
     content: "\f349"
 }
 
-.la-intersex:before,.la-transgender:before {
+.la-intersex:before,
+.la-transgender:before {
     content: "\f34a"
 }
 
@@ -2814,6 +2841,7 @@
 .la-yen:before {
     content: "\f38a"
 }
+
 .triangle-down {
     display: inline-block;
     width: 0;
@@ -2822,6 +2850,7 @@
     border-right: 5px solid transparent;
     border-top: 6px solid rgb(244, 243, 243);
 }
+
 .la-youtube:before {
     content: "\f38b"
 }

@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('client.auth.login'); // hoặc view('client.login.login') nếu bạn muốn dùng view client
+        return view('client.auth.login');
     }
 
     public function login(Request $request)
@@ -27,8 +27,9 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::user();
             
-            // SỬA: Redirect đến /dashboard thay vì /admin/dashboard
-            // Laravel sẽ tự động redirect đến đúng dashboard dựa vào role
+            // Tạo lại session ID để bảo mật
+            $request->session()->regenerate();
+            
             return redirect()->route('dashboard')
                 ->with('success', 'Chào mừng ' . $user->getRoleName() . ' ' . $user->name);
         }
@@ -60,15 +61,22 @@ class AuthController extends Controller
         ]);
 
         Auth::login($user);
+        
+        // Tạo lại session ID
+        $request->session()->regenerate();
 
-        // SỬA: Redirect đến /dashboard
         return redirect()->route('dashboard')
             ->with('success', 'Đăng ký thành công!');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        
+        // Xóa toàn bộ session
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
         return redirect()->route('home')->with('success', 'Đăng xuất thành công');
     }
 }

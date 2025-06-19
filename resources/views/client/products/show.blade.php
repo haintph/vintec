@@ -1,5 +1,14 @@
-@extends('client.products.layouts.app')
+@extends('client.layouts.master')
+@section('title', ''. $product->name . ' - Vintec')
 @section('content')
+
+    <head>
+        <link rel="stylesheet" href="/vintec/style1.css" type="text/css">
+        <link rel="stylesheet" href="/vintec/style5.css" type="text/css">
+        <script src="/vintec/main.js"></script>
+        <script src="/vintec/main3.js"></script>
+        
+    </head>
     <!-- Breadcrumb -->
     <nav class="breadcrumb">
         <span class="breadcrumb-item">Trang chủ</span>
@@ -43,13 +52,13 @@
 
             <div class="product-options">
                 <!-- Storage Options
-                        <div class="option-group">
-                            <div class="option-label">Dung lượng</div>
-                            <div class="storage-options">
-                                <button class="storage-btn active">512GB</button>
-                                <button class="storage-btn">1TB</button>
-                            </div>
-                        </div> -->
+                            <div class="option-group">
+                                <div class="option-label">Dung lượng</div>
+                                <div class="storage-options">
+                                    <button class="storage-btn active">512GB</button>
+                                    <button class="storage-btn">1TB</button>
+                                </div>
+                            </div> -->
 
                 <!-- Color Options  -->
                 <div class="option-group">
@@ -73,15 +82,15 @@
 
             <!-- Action Buttons -->
             <!-- <div class="action-buttons">
-                        <button class="btn btn-add-cart">
-                            Thêm vào giỏ
-                            <div class="btn-subtitle">Giao tận nơi, lắp đặt miễn phí</div>
-                        </button>
-                        <button class="btn btn-buy-now">
-                            Thanh toán ngay
-                            <div class="btn-subtitle">Giao tận nơi, lắp đặt miễn phí</div>
-                        </button>
-                    </div> -->
+                            <button class="btn btn-add-cart">
+                                Thêm vào giỏ
+                                <div class="btn-subtitle">Giao tận nơi, lắp đặt miễn phí</div>
+                            </button>
+                            <button class="btn btn-buy-now">
+                                Thanh toán ngay
+                                <div class="btn-subtitle">Giao tận nơi, lắp đặt miễn phí</div>
+                            </button>
+                        </div> -->
 
             <!-- Promotions -->
             <div class="promotions">

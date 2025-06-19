@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\CategoryPost;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Logo;
 use App\Models\Banner;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        View::composer('client.layouts.master', function ($view) {
+            $categories = CategoryPost::all(); // ← không cần scope nếu chưa có cột is_active
+            $view->with('newsCategories', $categories);
+        });
         // Share logos to all views EXCEPT admin views
         View::composer(['layouts.*', 'components.*', 'pages.*'], function ($view) {
             $logos = [
@@ -37,10 +43,10 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['layouts.*', 'pages.*', 'client.*'], function ($view) {
             try {
                 $banners = Banner::where('status', true)
-                                ->orderBy('created_at', 'desc')
-                                ->limit(5)
-                                ->get();
-                
+                    ->orderBy('created_at', 'desc')
+                    ->limit(5)
+                    ->get();
+
                 $view->with('banners', $banners);
             } catch (\Exception $e) {
                 // Fallback nếu bảng chưa tồn tại
